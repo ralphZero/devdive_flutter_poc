@@ -1,3 +1,4 @@
+import 'package:devdive_flutter_poc/data/jokes.dart';
 import 'package:devdive_flutter_poc/widgets/joke_card.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +17,7 @@ class Home extends StatelessWidget {
             fontFamily: 'Pacifico',
           ),
         ),
+        centerTitle: true,
         backgroundColor: const Color(0xFF282828),
       ),
       body: Column(
@@ -31,17 +33,15 @@ class Home extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: ListView(
-              children: const [
-                JokeCard(),
-                JokeCard(),
-                JokeCard(),
-                JokeCard(),
-                JokeCard(),
-                JokeCard(),
-              ],
-            ),
-          ),
+              child: ListView.builder(
+            itemCount: jokelist.length,
+            itemBuilder: (context, index) {
+              return JokeCard(
+                setup: jokelist[index]['setup'].toString(),
+                punchline: jokelist[index]['punchline'].toString(),
+              );
+            },
+          )),
         ],
       ),
     );
