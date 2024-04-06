@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class JokeCard extends StatelessWidget {
+  final String setup;
+  final String punchline;
+
   const JokeCard({
+    required this.setup,
+    required this.punchline,
     super.key,
   });
 
@@ -20,16 +25,16 @@ class JokeCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'What did the fish say when it hit the wall?',
-            style: TextStyle(
+          Text(
+            setup,
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 18.0,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
-            'Dam.',
+            punchline,
             style: TextStyle(
               color: Colors.grey[400],
               fontSize: 16.0,
