@@ -33,15 +33,17 @@ class Home extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: ListView.builder(
-            itemCount: jokelist.length,
-            itemBuilder: (context, index) {
-              return JokeCard(
-                setup: jokelist[index]['setup'].toString(),
-                punchline: jokelist[index]['punchline'].toString(),
-              );
-            },
-          )),
+            child: ListView(
+              children: jokelist
+                  .map(
+                    (joke) => JokeCard(
+                      setup: joke['setup'].toString(),
+                      punchline: joke['punchline'].toString(),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
         ],
       ),
     );

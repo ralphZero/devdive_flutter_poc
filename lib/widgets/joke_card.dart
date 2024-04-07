@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 
-class JokeCard extends StatelessWidget {
+class JokeCard extends StatefulWidget {
   final String setup;
   final String punchline;
+  final int initialRating;
 
   const JokeCard({
     required this.setup,
     required this.punchline,
+    this.initialRating = 0,
     super.key,
   });
+
+  @override
+  State<JokeCard> createState() => _JokeCardState();
+}
+
+class _JokeCardState extends State<JokeCard> {
+  int rating = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +35,7 @@ class JokeCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            setup,
+            widget.setup,
             style: const TextStyle(
               color: Colors.white,
               fontSize: 18.0,
@@ -34,7 +43,7 @@ class JokeCard extends StatelessWidget {
             ),
           ),
           Text(
-            punchline,
+            widget.punchline,
             style: TextStyle(
               color: Colors.grey[400],
               fontSize: 16.0,
@@ -47,25 +56,26 @@ class JokeCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image.asset(
-                    'assets/star.gif',
-                    width: 25.0,
-                  ),
-                  Image.asset(
-                    'assets/star.gif',
-                    width: 25.0,
-                  ),
-                  Image.asset(
-                    'assets/star.gif',
-                    width: 25.0,
-                  ),
+                  for (var i = 1; i <= rating; i++)
+                    Image.asset(
+                      'assets/star.gif',
+                      width: 25.0,
+                    ),
                 ],
               ),
               TextButton(
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.white,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    if (rating < 5) {
+                      rating++;
+                    } else {
+                      rating = 1;
+                    }
+                  });
+                },
                 child: const Text(
                   '+',
                   style: TextStyle(
